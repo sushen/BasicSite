@@ -1,2 +1,1 @@
-build:
-  context: docker-compose.yml
+$ docker build -f docker-compose.yml
