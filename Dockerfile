@@ -1,2 +1,2 @@
 build:
-  context: ./dir
+  context: ./
