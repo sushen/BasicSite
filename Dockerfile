@@ -1,12 +1,11 @@
-FROM ubuntu:bionic
+FROM nginx/unit:1.14.0-php7.3
+MAINTAINER tippexs
+RUN mkdir /var/apphome/ && groupadd -r wordpress && useradd --no-log-init -r -g wordpress wordpress && \
+    chown -R wordpress:wordpress /var/apphome/ && \
+    apt-get update && apt-get install --no-install-recommends --no-install-suggests -y php7.3-mysql php7.3-gd
+# Add WP CLI
 
-ARG version=1.25.0
-
-# https://docs.docker.com/compose/install/
-RUN \
-   apt -y update && \
-   apt -y install ca-certificates curl docker.io && \
-   curl -L "https://github.com/docker/compose/releases/download/$version/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-   chmod +x /usr/local/bin/docker-compose
-
-ENTRYPOINT ["/usr/local/bin/docker-compose"]
+COPY wordpress /var/apphome
+RUN chown -R wordpress:wordpress /var/apphome/
+COPY .unit.conf.json /docker-entrypoint.d/.unit.conf.json
+CMD ["unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
