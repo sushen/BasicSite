@@ -1,2 +1,2 @@
 build:
-  context: ./docker-compose.yml
+  context: docker-compose.yml
