@@ -1,1 +1,1 @@
-docker build -f ./docker-compose.yml
+ENTRYPOINT ["/usr/local/bin/docker-compose"]
