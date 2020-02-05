@@ -10,7 +10,7 @@ services:
   db:
     image: mysql:5.7
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
+      #- ./db:/docker-entrypoint-initdb.d
       - db_data:/var/lib/mysql
     restart: always
     environment:
